@@ -1,2 +1,24 @@
+// Set Express and Body-Parser
 var express = require("express");
-var bodyparser = requirae("body-parser");
+var bodyParser = requirae("body-parser");
+
+var app = express();
+var PORT = process.env.PORT || 8000;
+
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+var routes = require("./controllers/burgers_controller.js");
+
+app.use(routes);
+
+app.listen(PORT, function() {
+  console.log("Server is connected on port: " + PORT);
+});
