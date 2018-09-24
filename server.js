@@ -1,6 +1,6 @@
 // Set Express and Body-Parser
 var express = require("express");
-var bodyParser = requirae("body-parser");
+var bodyParser = require("body-parser");
 
 var app = express();
 var PORT = process.env.PORT || 8000;
