@@ -1,7 +1,7 @@
 var connection = require("../config/connection.js");
 
 // Create an array for question marks needed for MySQL values:
-function quesMarkVal(num) {
+function printQuestionMarks(num) {
     var arr = [];
 
     for(var i = 0; i < num; i++) {
@@ -12,7 +12,7 @@ function quesMarkVal(num) {
 };
 
 // Create a function to push object key/value into MySQL syntax:
-function toSql(obj) {
+function objToSql(obj) {
     var arr = [];
 
     for(var key in obj) {
@@ -45,7 +45,7 @@ var orm = {
         queryStr += cols.toString();
         queryStr += ") ";
         queryStr += "VALUES (";
-        queryStr += quesMarkVal(vals.length);
+        queryStr += printQuestionMarks(vals.length);
         queryStr += ") ";
 
         // Check that queryStr will pull data from the table correctly:
@@ -60,7 +60,7 @@ var orm = {
         var queryStr = "UPDATE " + table;
 
         queryStr += "SET ";
-        queryStr += toSql(colVals);
+        queryStr += objToSql(colVals);
         queryStr += "WHERE ";
         queryStr += cond;
 
