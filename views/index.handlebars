@@ -2,29 +2,37 @@
 
 <h1 id="header">Let's Eat!</h1>
 
-{{!-- When new burgers are added, the information from the database will be added to list. --}}
-<ul>
-  {{#each burgers}}
-    {{#unless devoured}}
-      {{> burgers/line-item devour=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
+<div class="container" style="margin-left: 25%">
+  <div class="row justify-content-md-center">
+    <div class="col-md-6">
+      {{#each burgers}}
+        <div>
+          <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
+            {{this.burger_name}}
+            <button type="submit" class="lets-eat">Devour!</button>
+          </form>
+        </div>
+      {{/each}}
+    </div>
+    
+    <div class="col-md-6">
+      {{#each burgers}}
+        {{#if this.devoured}}
+          <div class="eaten">
+            {{this.burger_name}}
+          </div>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</div>
 
-<ul>
-  {{#each burgers}}
-    {{#if devoured}}
-      {{> burgers/line-item devour=false}}
-    {{/if}}
-  {{/each}}
-</ul>
 
 {{!-- This will submit the user input into the database --}}
-<h2 id="burgerName">Name a Burger!</h2>
+<h4 id="burgerName">Name a Burger!</h4>
 
 <form class="burgerForm">
     <div class="inputBox">
-        <label for="burger">Burger Name:</label>
         <textarea name="newBurger" id="message" cols="30" rows="10"></textarea>
     </div>
 
