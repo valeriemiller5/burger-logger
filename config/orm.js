@@ -1,77 +1,83 @@
 var connection = require("../config/connection.js");
 
-// Create an array for question marks needed for MySQL values:
 function printQuestionMarks(num) {
-    var arr = [];
+  var arr = [];
 
-    for(var i = 0; i < num; i++) {
-        arr.push("?");
-    };
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
 
-    return arr.toString();
-};
+  return arr.toString();
+}
 
-// Create a function to push object key/value into MySQL syntax:
-function objToSql(obj) {
-    var arr = [];
+function objToSql(ob) {
+  var arr = [];
 
-    for(var key in obj) {
-        var val = obj[key];
-        // .hasOwnProperty is a javascript boolean indicating whether the object has the specified property as its own property.
-        if(Object.hasOwnProperty.call(obj, key)) {
-            // If the string has spaces, put quotations around it:
-            if(typeof val === "string" && val.indexOf(" ") >= 0) {
-                val = "'" + val + "'";
-            }
-            arr.push(key + "=" + val);
-        };
-    };
-    return arr.toString();
-};
+   for (var key in ob) {
+    var value = ob[key];
+    
+    if (Object.hasOwnProperty.call(ob, key)) {
+      // if string with spaces then surround the string with quotations ''
+      if (typeof value === "string" && value.indexOf(" ") >= 0) {
+        value = "'" + value + "'";
+      }
+      
+      arr.push(key + "=" + value);
+    }
+  }
+
+  return arr.toString();
+}
 
 //ORM methods that will be needed: selectAll(), insertOne(), updateOne()
 var orm = {
-    selectAll: function(tableInput, callBack) {
-        var queryStr = "SELECT * FROM " + tableInput + ";";
-        connection.query(queryStr, function(err, res) {
-            if(err) throw err;
-            callBack(res);
-        })
-    },
-    insertOne: function(table, cols, vals, callBack) {
-        var queryStr = "INSERT INTO " + table;
-        
-        queryStr += " (";
-        queryStr += cols.toString();
-        queryStr += ") ";
-        queryStr += "VALUES (";
-        queryStr += printQuestionMarks(vals.length);
-        queryStr += ") ";
+  selectAll: function(tableInput, cb) {
+    var queryString = "SELECT * FROM " + tableInput + ";";
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  },
+  insertOne: function(table, cols, vals, cb) {
+    var queryString = "INSERT INTO " + table;
 
-        // Check that queryStr will pull data from the table correctly:
-        console.log(queryStr);
+    queryString += " (";
+    queryString += cols.toString();
+    queryString += ") ";
+    queryString += "VALUES (";
+    queryString += printQuestionMarks(vals.length);
+    queryString += ") ";
 
-        connection.query(queryStr, function(err, res) {
-            if(err) throw err;
-            callBack(res);
-        })
-    },
-    updateOne: function(table, colVals, cond, callBack) {
-        var queryStr = "UPDATE " + table;
+    console.log(queryString);
 
-        queryStr += "SET ";
-        queryStr += objToSql(colVals);
-        queryStr += "WHERE ";
-        queryStr += cond;
+    connection.query(queryString, vals, function(err, result) {
+      if (err) {
+        throw err;
+      }
 
-        // Check that queryStr will pull data from the table correctly:
-        console.log(queryStr);
+      cb(result);
+    });
+  },
+  
+  updateOne: function(table, objColVals, condition, cb) {
+    var queryString = "UPDATE " + table;
 
-        connection.query(queryStr, function(err, res) {
-            if(err) throw err;
-            callBack(res);
-        });
-    }
+    queryString += " SET ";
+    queryString += objToSql(objColVals);
+    queryString += " WHERE ";
+    queryString += condition;
+
+    console.log(queryString);
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+
+      cb(result);
+    });
+  }
 };
 
 module.exports = orm;

@@ -1,5 +1,3 @@
-<img src="assets/img/burger_image.gif" alt="burgerPic" style="margin-left: 40%"/>
-
 <h1 id="header">Let's Eat!</h1>
 
 <div class="container" style="margin-left: 25%">
@@ -8,7 +6,7 @@
       {{#each burgers}}
         <div>
           <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
-            {{this.burger_name}}
+            {{this.id}}. {{this.burger_name}}
             <button type="submit" class="lets-eat">Devour!</button>
           </form>
         </div>
@@ -17,11 +15,9 @@
     
     <div class="col-md-6">
       {{#each burgers}}
-        {{#if this.devoured}}
           <div class="eaten">
-            {{this.burger_name}}
+            {{this.id}}. {{this.burger_name}}
           </div>
-        {{/if}}
       {{/each}}
     </div>
   </div>
