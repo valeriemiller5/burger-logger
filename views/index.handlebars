@@ -1,21 +1,31 @@
-<h1>Lets Eat!</h1>
+<img src="assets/img/burger_image.gif" alt="burgerPic" style="margin-left: 40%"/>
+
+<h1 id="header">Let's Eat!</h1>
 
 {{!-- When new burgers are added, the information from the database will be added to list. --}}
 <ul>
   {{#each burgers}}
     {{#unless devoured}}
-      {{> burgers devoured=true}}
+      {{> burgers/line-item devour=true}}
     {{/unless}}
   {{/each}}
 </ul>
 
+<ul>
+  {{#each burgers}}
+    {{#if devoured}}
+      {{> burgers/line-item devour=false}}
+    {{/if}}
+  {{/each}}
+</ul>
+
 {{!-- This will submit the user input into the database --}}
-<h2>Name a Burger!</h2>
+<h2 id="burgerName">Name a Burger!</h2>
 
 <form class="burgerForm">
     <div class="inputBox">
         <label for="burger">Burger Name:</label>
-        <textarea name="burgerName" id="message" cols="30" rows="10"></textarea>
+        <textarea name="newBurger" id="message" cols="30" rows="10"></textarea>
     </div>
 
     <button id="submit" type="submit">Make a Burger</button>

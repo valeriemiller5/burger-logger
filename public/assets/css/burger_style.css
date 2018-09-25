@@ -1,5 +1,9 @@
 body {
-    height: 1200px;
+    height: 650px;
     background-color: white;
     background-image: linear-gradient(skyblue, pink);
 };
+
+h1 {
+    margin-left: 40%;
+}
