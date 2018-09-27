@@ -4,27 +4,24 @@
 <div class="container" style="margin-left: 25%">
   <div class="row justify-content-md-center">
     <div class="col-md-6">
-      {{#each burgers}}
-        {{#unless this.devoured}}
-          <div>
-            <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
-              {{this.id}}. {{this.burger_name}}
-              <button class="lets-eat">Devour!</button>
-            </form>
-          </div>
-        {{/unless}}
-      {{/each}}
+      <ul>
+        {{#each burgers}}
+          {{#unless this.devoured}}
+            {{> burgers/burger-block devoured=true}}
+          {{/unless}}
+        {{/each}}
+      </ul>
     </div>
     
 {{!-- This will list all burgers that have been devoured --}}
     <div class="col-md-6">
-      {{#each burgers}}
-        {{#if this.devoured}}
-          <div class="devoured">
-            {{this.id}}. {{this.burger_name}}
-          </div>
-        {{/if}}
-      {{/each}}
+      <ul>
+        {{#each burgers}}
+          {{#if this.devoured}}
+            {{> burgers/burger-block devour=false}}
+          {{/if}}
+        {{/each}}
+      </ul>
     </div>
   </div>
 </div>
@@ -35,12 +32,12 @@
 
 <div class="row">
   <div class="col-md-12">
-    <form class="burgerForm" method="POST">
+    <form class="burgerForm">
       <div class="inputBox">
           <textarea name="newBurger" id="message" cols="30" rows="10"></textarea>
       </div>
 
-      <button id="submit" type="submit">Make a Burger</button>
+      <button id="makeBurger" type="submit">Make a Burger</button>
     </form> 
   </div>
 </div>
