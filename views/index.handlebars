@@ -9,7 +9,7 @@
           <div>
             <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
               {{this.id}}. {{this.burger_name}}
-              <button type="submit" class="lets-eat">Devour!</button>
+              <button class="lets-eat">Devour!</button>
             </form>
           </div>
         {{/unless}}
@@ -35,7 +35,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <form action="/burgers" method="POST" class="burgerForm">
+    <form class="burgerForm" method="POST">
       <div class="inputBox">
           <textarea name="newBurger" id="message" cols="30" rows="10"></textarea>
       </div>
