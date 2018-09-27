@@ -10,13 +10,13 @@ function printQuestionMarks(num) {
   return arr.toString();
 }
 
-function objToSql(ob) {
+function objToSql(obj) {
   var arr = [];
 
-   for (var key in ob) {
-    var value = ob[key];
+   for (var key in obj) {
+    var value = obj[key];
     
-    if (Object.hasOwnProperty.call(ob, key)) {
+    if (Object.hasOwnProperty.call(obj, key)) {
       // if string with spaces then surround the string with quotations ''
       if (typeof value === "string" && value.indexOf(" ") >= 0) {
         value = "'" + value + "'";
@@ -34,9 +34,7 @@ var orm = {
   selectAll: function(tableInput, cb) {
     var queryString = "SELECT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
+      if (err) throw err;
       cb(result);
     });
   },
@@ -71,10 +69,7 @@ var orm = {
 
     console.log(queryString);
     connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-
+      if (err) throw err;
       cb(result);
     });
   }

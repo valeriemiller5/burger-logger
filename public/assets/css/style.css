@@ -4,7 +4,7 @@ body {
     background-image: linear-gradient(skyblue, pink);
 };
 
-#header {
+h1 {
     color: darkorchid;
     margin-left: 50%;
 }
