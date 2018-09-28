@@ -4,11 +4,6 @@ body {
     background-image: linear-gradient(skyblue, pink);
 };
 
-h1 {
-    color: darkorchid;
-    margin-left: 50%;
-}
-
 li {
     width: 50%;
 }
