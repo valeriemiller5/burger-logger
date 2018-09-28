@@ -8,3 +8,12 @@ h1 {
     color: darkorchid;
     margin-left: 50%;
 }
+
+li {
+    width: 50%;
+}
+
+ul {
+    background-color: cornsilk;
+    list-style: none;
+  }

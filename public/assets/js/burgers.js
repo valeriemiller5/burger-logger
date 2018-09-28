@@ -2,28 +2,25 @@
 $(function() {
     $(".change-devour").on("click", function(event) {
         var id = $(this).data("id");
-        var devour = $(this).data("devour");
 
         var eatStatus = {
-            devoured: devour
+            devoured: true
         }
 
         $.ajax("/api/burgers/" + id, {
             type: "PUT", 
             data: eatStatus
-        }).then(
-            function() {
-                console.log("Eat Status: " + devour);
+        }).then(function() {
+                console.log("Eat Status: " + true);
                 location.reload();
-            }
-        );
+        });
     });
 
     $(".burgerForm").on("submit", function(event) {
         event.preventDefault();
 
         var newBurger = {
-            burger_name: $("#message").val().trim(),
+            burger_name: $("newBurger").val().trim(),
             devoured: false
         };
 
