@@ -18,7 +18,7 @@
       <ul>
         {{#each burgers}}
           {{#if this.devoured}}
-            <li>{{burger_name}}</li>
+            <li>{{id}}. {{burger_name}}</li>
           {{/if}}
         {{/each}}
       </ul>
@@ -28,15 +28,15 @@
 
 
 {{!-- This will submit the user input into the database --}}
-<h4 id="burgerName">Name a Burger!</h4>
+<h4 id="title">Name a Burger!</h4>
 
 <div class="row">
   <div class="col-md-12">
     <form class="burgerForm">
       <div class="inputBox">
-          <textarea id="newBurger" cols="25" rows="5"></textarea>
+          <label for="name"></label>
+          <textarea id="name" name="burgerName" cols="30" rows="5" placeholder="Name your burger"></textarea>
       </div>
-
       <button id="makeBurger" type="submit">Make a Burger</button>
     </form> 
   </div>

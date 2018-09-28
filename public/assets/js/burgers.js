@@ -19,19 +19,22 @@ $(function() {
     $(".burgerForm").on("submit", function(event) {
         event.preventDefault();
 
-        var newBurger = {
-            burger_name: $("newBurger").val().trim(),
-            devoured: false
-        };
+        var name = $("[name=burgerName]").val().trim();
+
+        if(name !== "") {
+            var newBurger = {
+                burger_name: name
+            }
 
         $.ajax("/api/burgers", {
             type: "POST",
             data: newBurger
-        }).then(
-            function() {
-                console.log("New burger logged");
-                location.reload();
-            }
-        );
+        }).then(function() {
+            console.log("New burger logged");
+            location.reload();
+        });
+        } else {
+            $("[name=burgerName]").val("");
+        };
     });
 });
