@@ -24,7 +24,7 @@ $(function() {
         if(name !== "") {
             var newBurger = {
                 burger_name: name,
-                // devoured: 0
+                devoured: false
             }
 
         $.ajax("/api/burgers", {
