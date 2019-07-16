@@ -27,7 +27,8 @@
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.14",
     "minimatch": "^3.0.4",
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "underscore.string": "3.3.5"
   },
   "devDependencies": {
     "handlebars-helper-css": "^0.1.0"
